@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>multi_robot_planner</name>
+  <version>0.0.0</version>
+  <description>Planner for multiple robot for the MKR course at the Czech Technical University in Prague</description>
+
+  <maintainer email="gael.ecorchard@cvut.cz">Gaël Écorchard</maintainer>
+  <maintainer email="karel.kosnar@cvut.cz">Karel Košnar</maintainer>
+
+  <license>MIT</license>
+
+  <url type="website">https://cw.fel.cvut.cz/wiki/courses/b3m33mkr/cviceni</url>
+
+  <author email="gael.ecorchard@cvut.cz">Gaël Écorchard</author>
+  <author email="karel.kosnar@cvut.cz">Karel Košnar</author>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>occupancy_grid_utils</depend>
+  <depend>robot_coordination</depend>
+  <depend>roscpp</depend>
+
+  <export>
+  </export>
+</package>

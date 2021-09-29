@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+
+  <include file="$(find simulator_e130)/launch/two_turtlebots_in_flatland.launch" />
+
+  <node ns="turtle0" pkg="robot_coordination" type="robot_node" name="coordinator" output="screen">
+  </node>
+
+  <node ns="turtle1" pkg="robot_coordination" type="robot_node" name="coordinator" output="screen">
+  </node>
+
+  <node pkg="multi_robot_planner" type="planner" name="multi_robot_planner" output="screen">
+    <remap from="~goal" to="/goal" />
+    <param name="robot_count" value="2" />
+  </node>
+
+</launch>

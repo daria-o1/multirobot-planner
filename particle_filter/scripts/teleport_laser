@@ -1,0 +1,49 @@
+#!/usr/bin/env python
+"""Teleport LaserScan messages to another frame.
+
+Copy laser-scan messages, modify their parent frame and publish them under a
+new topic.
+"""
+
+import rospy
+
+from sensor_msgs.msg import LaserScan
+
+g_laser_frame = ''
+g_pub_ = None
+
+
+def laserscan_callback(msg):
+    """Modify frame_id and publish."""
+    msg.header.frame_id = g_laser_frame
+    g_pub_.publish(msg)
+
+
+def main():
+    """Init the node and the subscriber."""
+    global g_laser_frame
+    global g_pub_
+
+    rospy.init_node('teleport_laser')
+
+    laser_frame_param_name = '~laser_frame'
+    if not rospy.has_param(laser_frame_param_name):
+        rospy.logerr('Parameter {} must be set, exiting'.format(
+            rospy.resolve_name(laser_frame_param_name)))
+        exit(1)
+
+    g_laser_frame = rospy.get_param(laser_frame_param_name)
+
+    g_pub_ = rospy.Publisher('~laser_out', LaserScan, queue_size=10)
+
+    sub = rospy.Subscriber('~laser_in', LaserScan, laserscan_callback,
+                           queue_size=10)
+
+    rospy.spin()
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except rospy.ROSInterruptException:
+        pass
